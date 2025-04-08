@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Auriculares Inalámbricos Pro",
+    "description": "Auriculares con cancelación activa de ruido y sonido envolvente 3D.",
+    "code": "AUR-PRO-001",
+    "price": 300,
+    "status": true,
+    "stock": 45,
+    "category": "Audio",
+    "thumbnails": [
+      "/images/auriculares-pro-front.jpg",
+      "/images/auriculares-pro-side.jpg"
+    ]
+  }
+]
