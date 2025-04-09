@@ -24,9 +24,22 @@ class ProductManager {
   }
 
   async addProduct(product) {
+    const { title, description, price, thumbnail, code, stock } = product;
+
     const products = await this.getFile();
+    const foundCode = products.find((pr) => pr.code === code);
+    if (foundCode) return console.log("Code already exists");
+
     const id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
-    const newProduct = { id, ...product };
+    const newProduct = {
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+      id,
+    };
     products.push(newProduct);
     await this.createFile(products);
     return newProduct;

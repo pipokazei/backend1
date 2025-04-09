@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "Auriculares Inalámbricos Pro",
+    "description": "Auriculares con cancelación activa de ruido y sonido envolvente 3D.",
+    "code": "AUR-PRO-001",
+    "price": 300,
+    "status": true,
+    "stock": 50,
+    "category": "Audio",
+    "thumbnails": [
+      "/images/auriculares-pro-front.jpg",
+      "/images/auriculares-pro-side.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Auriculares Inalámbricos Pro",
+    "description": "Auriculares con cancelación activa de ruido y sonido envolvente 3D.",
+    "code": "AUR-PRO-001",
+    "price": 300,
+    "status": true,
+    "stock": 45,
+    "category": "Audio",
+    "thumbnails": [
+      "/images/auriculares-pro-front.jpg",
+      "/images/auriculares-pro-side.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Auriculares Inalámbricos Pro",
+    "description": "Auriculares con cancelación activa de ruido y sonido envolvente 3D.",
+    "code": "AUR-PRO-001",
+    "price": 300,
+    "status": true,
+    "stock": 45,
+    "category": "Audio",
+    "thumbnails": [
+      "/images/auriculares-pro-front.jpg",
+      "/images/auriculares-pro-side.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Auriculares Inalámbricos Pro",
+    "description": "Auriculares con cancelación activa de ruido y sonido envolvente 3D.",
+    "code": "AUR-PRO-001",
+    "price": 300,
+    "status": true,
+    "stock": 45,
+    "category": "Audio",
+    "thumbnails": [
+      "/images/auriculares-pro-front.jpg",
+      "/images/auriculares-pro-side.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Auriculares Inalámbricos Pro",
+    "description": "Auriculares con cancelación activa de ruido y sonido envolvente 3D.",
+    "code": "AUR-PRO-001",
+    "price": 300,
+    "status": true,
+    "stock": 45,
+    "category": "Audio",
+    "thumbnails": [
+      "/images/auriculares-pro-front.jpg",
+      "/images/auriculares-pro-side.jpg"
+    ]
+  }
+]
