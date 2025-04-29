@@ -18,7 +18,6 @@ export default (io) => {
       io.emit("update-products", updated);
     });
 
-    // Send initial product list
     const initial = await manager.getProducts();
     socket.emit("update-products", initial);
   });

@@ -30,4 +30,4 @@ app.use("/api/products", productRoutes);
 app.use("/api/carts", cartRoutes);
 app.use("/", viewRoutes);
 
-httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // ✅ Correct
+httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
