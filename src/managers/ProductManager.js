@@ -7,8 +7,6 @@ const __dirname = path.dirname(__filename);
 
 class ProductManager {
   constructor(filePath) {
-    console.log(__filename, "file", __dirname, "dir", filePath, "filePath");
-
     this.path = path.resolve(__dirname, filePath);
   }
 
@@ -42,7 +40,6 @@ class ProductManager {
       stock,
       id,
     };
-    console.log(newProduct);
     products.push(newProduct);
     await this.createFile(products);
     return newProduct;

@@ -1,0 +1,24 @@
+<h1>Productos</h1>
+
+<form id="product-form">
+  <input name="title" placeholder="Title" required />
+  <input name="description" placeholder="Description" required />
+  <input name="price" type="number" placeholder="Price" required />
+  <input name="thumbnail" placeholder="Thumbnail" required />
+  <input name="code" placeholder="Code" required />
+  <input name="stock" type="number" placeholder="Stock" required />
+  <button type="submit">Add Product</button>
+</form>
+
+<ul id="product-list">
+  {{#each products}}
+    <li data-id="{{this.id}}">
+      <strong>{{this.title}}</strong>
+      - ${{this.price}}
+      <button class="delete-btn">Delete</button>
+    </li>
+  {{/each}}
+</ul>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/realTimeProducts.js"></script>
