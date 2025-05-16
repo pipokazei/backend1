@@ -1,24 +1,31 @@
-import ProductManager from "./managers/ProductManager.js";
-
-const manager = new ProductManager("data/products.json");
+import ProductModel from "./models/product.js";
 
 export default (io) => {
   io.on("connection", async (socket) => {
     console.log("Cliente conectado:", socket.id);
 
+    const initial = await ProductModel.find().lean();
+    socket.emit("update-products", initial);
+
     socket.on("new-product", async (data) => {
-      await manager.addProduct(data);
-      const updated = await manager.getProducts();
-      io.emit("update-products", updated);
+      try {
+        await ProductModel.create(data);
+        const updated = await ProductModel.find().lean();
+        io.emit("update-products", updated);
+      } catch (err) {
+        console.error("Error creating product:", err);
+      }
     });
 
     socket.on("delete-product", async (id) => {
-      await manager.deleteProduct(id);
-      const updated = await manager.getProducts();
-      io.emit("update-products", updated);
+      try {
+        console.log(id);
+        await ProductModel.findByIdAndDelete(id);
+        const updated = await ProductModel.find().lean();
+        io.emit("update-products", updated);
+      } catch (err) {
+        console.error("Error deleting product:", err);
+      }
     });
-
-    const initial = await manager.getProducts();
-    socket.emit("update-products", initial);
   });
 };

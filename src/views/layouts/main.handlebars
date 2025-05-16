@@ -2,8 +2,26 @@
   <head>
     <meta charset="UTF-8" />
     <title>Productos</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 2rem; } ul { list-style:
+      none; padding: 0; } li { margin-bottom: 1rem; } button { margin-left:
+      1rem; }
+    </style>
   </head>
+  <script src="/initCart.js"></script>
   <body>
+    <header>
+      <nav>
+        <a href="/">Inicio</a>
+        |
+        <a href="/products">Products</a>
+        |
+        <a href="/cart" id="view-cart-link">Ver Carrito</a>
+      </nav>
+      <hr />
+    </header>
+
     {{{body}}}
+
   </body>
 </html>

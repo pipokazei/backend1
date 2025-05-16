@@ -1,0 +1,26 @@
+<h1 class="text-2xl font-bold mb-4">Mi Carrito</h1>
+
+{{#if products.length}}
+  <ul class="space-y-4">
+    {{#each products}}
+      <li class="border p-4 shadow">
+        <h2 class="text-lg font-semibold">{{this.product.title}}</h2>
+        <p>{{this.product.description}}</p>
+        <p>Precio: ${{this.product.price}}</p>
+        <p>Cantidad: {{this.quantity}}</p>
+        <button
+          data-id="{{this.product._id}}"
+          class="remove-btn text-red-600 mt-2"
+        >Eliminar</button>
+      </li>
+    {{/each}}
+  </ul>
+  <button id="clearCartBtn" class="mt-6 bg-red-600 text-white px-4 py-2">Vaciar
+    carrito</button>
+{{else}}
+  <p>Tu carrito está vacío.</p>
+{{/if}}
+
+<script src="/viewCart.js">
+
+</script>

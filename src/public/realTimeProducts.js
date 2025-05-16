@@ -15,22 +15,22 @@ form.addEventListener("submit", (e) => {
   form.reset();
 });
 
-productList.addEventListener("click", (e) => {
-  if (e.target.classList.contains("delete-btn")) {
-    const li = e.target.closest("li");
-    const id = li.dataset.id;
-    socket.emit("delete-product", parseInt(id));
-  }
-});
-
 socket.on("update-products", (products) => {
   productList.innerHTML = "";
   products.forEach((p) => {
     productList.innerHTML += `
-      <li data-id="${p.id}">
+      <li data-id="${p._id}">
         <strong>${p.title}</strong> - $${p.price}
         <button class="delete-btn">Delete</button>
       </li>
     `;
   });
+});
+
+productList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    const li = e.target.closest("li");
+    const id = li.dataset.id;
+    socket.emit("delete-product", id);
+  }
 });

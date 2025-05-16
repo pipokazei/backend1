@@ -1,24 +1,61 @@
-<h1>Productos</h1>
+<h1 class="text-2xl font-bold">Productos</h1>
 
-<form id="product-form">
-  <input name="title" placeholder="Title" required />
-  <input name="description" placeholder="Description" required />
-  <input name="price" type="number" placeholder="Price" required />
-  <input name="thumbnail" placeholder="Thumbnail" required />
-  <input name="code" placeholder="Code" required />
-  <input name="stock" type="number" placeholder="Stock" required />
-  <button type="submit">Add Product</button>
+<form id="product-form" class="mt-4 space-y-2">
+  <input name="title" placeholder="Título" required class="border p-1" />
+  <input
+    name="description"
+    placeholder="Descripción"
+    required
+    class="border p-1"
+  />
+  <input name="code" placeholder="Código" required class="border p-1" />
+  <input
+    name="price"
+    type="number"
+    placeholder="Precio"
+    required
+    class="border p-1"
+  />
+  <input
+    name="stock"
+    type="number"
+    placeholder="Stock"
+    required
+    class="border p-1"
+  />
+  <input name="category" placeholder="Categoría" required class="border p-1" />
+  <input
+    name="thumbnails"
+    placeholder="URLs separadas por coma"
+    class="border p-1"
+  />
+  <button
+    type="submit"
+    class="bg-blue-600 text-white px-4 py-1"
+  >Agregar</button>
 </form>
 
-<ul id="product-list">
+<div id="product-list" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
   {{#each products}}
-    <li data-id="{{this.id}}">
-      <strong>{{this.title}}</strong>
-      - ${{this.price}}
-      <button class="delete-btn">Delete</button>
-    </li>
+    <div class="border p-3 shadow">
+      <h2 class="font-semibold">{{this.title}}</h2>
+      <p>{{this.description}}</p>
+      <p>Precio: ${{this.price}}</p>
+    </div>
   {{/each}}
-</ul>
+</div>
+
+<div style="margin-top: 2rem;">
+  {{#if hasPrevPage}}
+    <a href="/?page={{prevPage}}">&laquo; Página anterior</a>
+  {{/if}}
+
+  <span style="margin: 0 1rem;">Página {{page}}</span>
+
+  {{#if hasNextPage}}
+    <a href="/?page={{nextPage}}">Página siguiente &raquo;</a>
+  {{/if}}
+</div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/realTimeProducts.js"></script>

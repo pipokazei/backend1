@@ -2,6 +2,27 @@
 
 <ul>
   {{#each products}}
-    <li><strong>{{this.title}}</strong> - ${{this.price}}</li>
+    <li>
+      <a
+        href="/products/{{this._id}}"
+        class="text-blue-600 underline"
+      >{{this.title}}</a>
+      - ${{this.price}}
+      <button class="addToCartBtn" data-id="{{this._id}}">Agregar al carrito</button>
+    </li>
   {{/each}}
 </ul>
+
+<div style="margin-top: 2rem;">
+  {{#if hasPrevPage}}
+    <a href="/?page={{prevPage}}">&laquo; Página anterior</a>
+  {{/if}}
+
+  <span style="margin: 0 1rem;">Página {{page}}</span>
+
+  {{#if hasNextPage}}
+    <a href="/?page={{nextPage}}">Página siguiente &raquo;</a>
+  {{/if}}
+</div>
+
+<script src="/productDetail.js"></script>
