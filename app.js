@@ -28,7 +28,16 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "src", "public")));
 
-app.engine("handlebars", hbs.engine());
+app.engine(
+  "handlebars",
+  hbs.engine({
+    helpers: {
+      limit: function (arr, limit) {
+        return arr.slice(0, limit);
+      },
+    },
+  })
+);
 app.set("views", path.join(__dirname, "src", "views"));
 app.set("view engine", "handlebars");
 

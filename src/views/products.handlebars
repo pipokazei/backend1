@@ -38,7 +38,10 @@
 <div id="product-list" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
   {{#each products}}
     <div class="border p-3 shadow">
-      <h2 class="font-semibold">{{this.title}}</h2>
+      <a
+        href="/products/{{this._id}}"
+        class="text-blue-600 underline"
+      >{{this.title}}</a>
       <p>{{this.description}}</p>
       <p>Precio: ${{this.price}}</p>
     </div>
@@ -58,4 +61,4 @@
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="/realTimeProducts.js"></script>
+<script src="/products.js"></script>

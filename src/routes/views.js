@@ -14,10 +14,54 @@ router.get("/", async (req, res) => {
 
 router.get("/products", async (req, res) => {
   try {
-    const products = await productModel.find().lean();
-    res.render("realTimeProducts", { products });
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const sort = req.query.sort;
+    const query = req.query.query;
+
+    const filter = query
+      ? {
+          $or: [
+            { category: { $regex: query, $options: "i" } },
+            { status: query === "available" ? true : false },
+          ],
+        }
+      : {};
+
+    const sortOption =
+      sort === "asc" ? { price: 1 } : sort === "desc" ? { price: -1 } : {};
+
+    const result = await productModel.paginate(filter, {
+      limit,
+      page,
+      sort: sortOption,
+      lean: true,
+    });
+
+    const {
+      docs: products,
+      totalPages,
+      hasPrevPage,
+      hasNextPage,
+      prevPage,
+      nextPage,
+    } = result;
+
+    res.render("products", {
+      products,
+      totalPages,
+      hasPrevPage,
+      hasNextPage,
+      prevPage,
+      nextPage,
+      page,
+      limit,
+      sort,
+      query,
+    });
   } catch (err) {
-    res.status(500).send("Error loading real-time products");
+    console.error("Error loading paginated products:", err);
+    res.status(500).send("Error al cargar los productos paginados.");
   }
 });
 

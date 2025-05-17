@@ -19,8 +19,10 @@ socket.on("update-products", (products) => {
   productList.innerHTML = "";
   products.forEach((p) => {
     productList.innerHTML += `
-      <li data-id="${p._id}">
-        <strong>${p.title}</strong> - $${p.price}
+     <li data-id="${p._id}">
+        <a href="/products/${p._id}" class="text-blue-600 underline">
+          <strong>${p.title}</strong>
+        </a> - $${p.price}
         <button class="delete-btn">Delete</button>
       </li>
     `;

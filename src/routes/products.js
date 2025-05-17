@@ -3,83 +3,20 @@ import productModel from "../models/product.js";
 
 const router = Router();
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const { limit = 10, page = 1, sort, query } = req.query;
-
-//     const filter = query
-//       ? {
-//           $or: [
-//             { category: query },
-//             { status: query === "available" ? true : false },
-//           ],
-//         }
-//       : {};
-
-//     const sortOption =
-//       sort === "asc" ? { price: 1 } : sort === "desc" ? { price: -1 } : {};
-
-//     const result = await productModel.paginate(filter, {
-//       limit: parseInt(limit),
-//       page: parseInt(page),
-//       sort: sortOption,
-//       lean: true,
-//     });
-
-//     const { docs, totalPages, hasPrevPage, hasNextPage, nextPage, prevPage } =
-//       result;
-
-//     res.json({
-//       status: "success",
-//       payload: docs,
-//       totalPages,
-//       prevPage,
-//       nextPage,
-//       page: result.page,
-//       hasPrevPage,
-//       hasNextPage,
-//       prevLink: hasPrevPage
-//         ? `/api/products?limit=${limit}&page=${prevPage}`
-//         : null,
-//       nextLink: hasNextPage
-//         ? `/api/products?limit=${limit}&page=${nextPage}`
-//         : null,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ status: "error", message: "Internal server error" });
-//   }
-// });
-
 router.get("/", async (req, res) => {
-  const { limit = 10, page = 1, sort, query } = req.query;
+  const queries = new PaginationParameters(req).get();
+  const response = await productModel.paginate({}, queries);
 
-  const filter = query ? { $or: [{ category: query }, { status: query }] } : {};
+  let prevLink = null;
+  let nextLink = null;
+  if (response.hasPrevPage) prevLink = `${PATH}/?page=${response.prevPage}`;
+  if (response.hasNextPage) nextLink = `${PATH}/?page=${response.nextPage}`;
 
-  const options = {
-    page: parseInt(page),
-    limit: parseInt(limit),
-    sort:
-      sort === "asc"
-        ? { price: 1 }
-        : sort === "desc"
-        ? { price: -1 }
-        : undefined,
-    lean: true,
-  };
-
-  const result = await productModel.paginate(filter, options);
-  res.render("home", {
-    products: result.docs,
-    hasPrevPage: result.hasPrevPage,
-    hasNextPage: result.hasNextPage,
-    prevPage: result.prevPage,
-    nextPage: result.nextPage,
-    page: result.page,
-    totalPages: result.totalPages,
-    prevLink: result.hasPrevPage ? `/?page=${result.prevPage}` : null,
-    nextLink: result.hasNextPage ? `/?page=${result.nextPage}` : null,
-  });
+  delete response.offset;
+  response.status = "success";
+  response.prevLink = prevLink;
+  response.nextLink = nextLink;
+  res.json(response);
 });
 
 router.get("/:pid", async (req, res) => {
